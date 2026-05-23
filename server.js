@@ -29,7 +29,13 @@ if (!fs.existsSync(uploadsDir)) {
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5174"];
+      const allowedOrigins = [
+        process.env.CLIENT_URL,
+        process.env.FRONTEND_URL,
+        "https://skill-forge-frontend-eight.vercel.app",
+        "http://localhost:5174",
+      ].filter(Boolean);
+
       const isLocalhost = typeof origin === "string" && /^http:\/\/localhost:\d+$/.test(origin);
 
       // Allow server-to-server calls (no Origin), configured origin, and local Vite ports.
